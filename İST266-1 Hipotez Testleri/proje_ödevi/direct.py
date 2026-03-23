@@ -1,0 +1,31 @@
+import numpy as np
+import pandas as pd #Daha sonra kullanım için
+import matplotlib as mpl # Daha sonra kullanma için
+import os
+
+"""
+Ödev 1
+"""
+if not os.path.exists('odev1_kitle.npy'):
+    degerler = np.random.normal(loc=50, scale=10, size=10000)
+    np.save('odev1_kitle.npy', degerler)
+
+kitle = np.load('odev1_kitle.npy')
+
+print(kitle)
+
+"""
+Bölüm 1 - Kitle Parametrelerinin Hesaplanması
+ - Kitle oratalaması 
+ - Kitle varyansı 
+hesabı
+"""
+# Kitle ortalaması
+toplam = 0
+for i in kitle:
+    toplam += i
+kitle_ort = toplam/10000
+print(kitle_ort)
+
+# Kitle varyansı
+
