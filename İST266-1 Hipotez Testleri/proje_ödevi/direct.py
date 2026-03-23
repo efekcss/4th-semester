@@ -24,8 +24,14 @@ hesabı
 toplam = 0
 for i in kitle:
     toplam += i
-kitle_ort = toplam/10000
-print(kitle_ort)
+kitle_ort = toplam/len(kitle)
+print(f"Kitle Ortalaması = {kitle_ort}")
 
 # Kitle varyansı
 
+toplam = 0
+for i in kitle:
+    denklem = (i - kitle_ort)**2
+    toplam += denklem
+kitle_var = toplam/len(kitle)
+print(f"Kitle Varyansı = {kitle_var}")
