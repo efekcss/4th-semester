@@ -7,13 +7,15 @@ dağılıma bağlı ancak farklı bir dağılım kullanırsak
 diye def ile fonksiyon olarak tanımlıyorum.
 """
 def normal_dagilim(mu=50, std_sapma=100, n=10000):
-    return np.random.normal(loc=0.0, scale=std_sapma, size=n)
+    return np.random.normal(loc=mu, scale=std_sapma, size=n)
 
 kitle = normal_dagilim()
-print(kitle)
+print(f"Kitle Degerleri : {kitle}")
 """
 Bölüm 1
-Kitle Parametrelerinin hesaplanmasi
+Kitle Parametrelerinin hesaplanmasi;
+* Kitle ortalaması
+* Kitle varyansı
 """
 def ort(degerler, n):
     toplam = 0
@@ -21,4 +23,4 @@ def ort(degerler, n):
         toplam += i
     return (toplam/n)
 kitle_ort = ort(kitle,10000)
-print(kitle_ort)
+print(f"Kitle Ortalaması = {kitle_ort}")
