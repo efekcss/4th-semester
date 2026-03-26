@@ -35,3 +35,12 @@ for i in kitle:
     toplam += denklem
 kitle_var = toplam/len(kitle)
 print(f"Kitle Varyansı = {kitle_var}")
+
+"""
+Bölğm 2 - Farklı Örneklem Büyüklükleri ile Nokta Tahmini
+Oluşturduğumuz kitleden n=10, n=30, n=100, n=500 büyüklüklerinde
+örneklemler oluşturalım
+
+Soru : X'in dağılımının parametrelerine ait nokta tahmini için neleri kullanırsınız? Elde ettiğiniz tahminleri kitle parametreleri ile karşılaştırınız.
+"""
+
