@@ -1,46 +1,25 @@
 import numpy as np
-import pandas as pd #Daha sonra kullanım için
-import matplotlib as mpl # Daha sonra kullanma için
-import os
 
-"""
-Ödev 1
-"""
-if not os.path.exists('odev1_kitle.npy'):
-    degerler = np.random.normal(loc=50, scale=10, size=10000)
-    np.save('odev1_kitle.npy', degerler)
-
-kitle = np.load('odev1_kitle.npy')
-
+rng = np.random.default_rng(seed=26)
+kitle = rng.normal(loc=50, scale=10, size=10000)
 print(kitle)
 
-"""
-Bölüm 1 - Kitle Parametrelerinin Hesaplanması
- - Kitle oratalaması 
- - Kitle varyansı 
-hesabı
-"""
-# Kitle ortalaması
-toplam = 0
-for i in kitle:
-    toplam += i
-kitle_ort = toplam/len(kitle)
-print(f"Kitle Ortalaması = {kitle_ort}")
+n10_means = []
+n30_means = []
+n100_means = []
+n500_means = []
+# Seed kullanmıyorum (rng.choice) çünkü kaydetmeme gerek yok sadece ortalmaları gereklı
+for i in range(1000):
+    sample10 = rng.choice(kitle,size=10)
+    n10_means.append(sample10)
+    
+    sample30 = rng.choice(kitle,size=30)
+    n30_means.append(sample30)
+    
+    sample100 = rng.choice(kitle,size=100)
+    n100_means.append(sample100)
 
-# Kitle varyansı
-
-toplam = 0
-for i in kitle:
-    denklem = (i - kitle_ort)**2
-    toplam += denklem
-kitle_var = toplam/len(kitle)
-print(f"Kitle Varyansı = {kitle_var}")
-
-"""
-Bölğm 2 - Farklı Örneklem Büyüklükleri ile Nokta Tahmini
-Oluşturduğumuz kitleden n=10, n=30, n=100, n=500 büyüklüklerinde
-örneklemler oluşturalım
-
-Soru : X'in dağılımının parametrelerine ait nokta tahmini için neleri kullanırsınız? Elde ettiğiniz tahminleri kitle parametreleri ile karşılaştırınız.
-"""
+    sample500 = rng.choice(kitle,size=500)
+    n500_means.append(sample500)
+print(n10_means)
 
