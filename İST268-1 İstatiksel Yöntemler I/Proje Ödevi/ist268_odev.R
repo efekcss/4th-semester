@@ -19,8 +19,8 @@ tapply(yakit, vites, length) # otomatik ve manuel viteslere göre örneklem mikt
 
 #Basit istatistikleri elde ettik şimdi hipotez testine geçebiliriz. iki yanlı hipotez testi incelenecektir
 # Ho : mu1 - mu2 = 0
-# Hs : mu1 _ mu2 =/ 0
+# Hs : mu1 - mu2 =/ 0
 # Kitle varyansları bilinmiyor
-#n1 de n2 de 30 dan küçükler MLT de yapamıyoruz t-testi yapmalıyız homojenliğe göre hangi t-testi olduğuna bakacağız
-#iki örneklem varyans testi yapacağız şimdi
+#n1'de n2'de 30 dan küçükler bu yüzden MLT'de yapamıyoruz t-testi yapmalıyız homojenliğe göre hangi t-testi olduğuna bakacağız
+#iki örneklem varyans testi yapacağız şimdi (sigma_1 / sigma_2)
 
