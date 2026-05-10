@@ -5,11 +5,7 @@
 # Kitle Ortalaması (mu) mu_1 - mu_2 icin Basit ist.ler, hipotez testi, guven aralığı
 
 vites <- factor(mtcars$am , levels = c(0,1) , labels = c("automatic","manuel")) 
-# labellamayı yaptık yani 0 = automatic , 1 = manuel
-print(vites)
-
-yakit <- (mtcars$mpg)
-print(yakit)
+yakit <- mtcars$mpg
 
 tapply(yakit, vites, mean) # otomatik ve manuel viteslerin örneklem ortalamaları
 
@@ -23,4 +19,7 @@ tapply(yakit, vites, length) # otomatik ve manuel viteslere göre örneklem mikt
 # Kitle varyansları bilinmiyor
 #n1'de n2'de 30 dan küçükler bu yüzden MLT'de yapamıyoruz t-testi yapmalıyız homojenliğe göre hangi t-testi olduğuna bakacağız
 #iki örneklem varyans testi yapacağız şimdi (sigma_1 / sigma_2)
+
+# Varyansların Homojenliği Testi (F-Test)
+var.test(yakit ~ vites, data = mtcars)
 
