@@ -7,11 +7,11 @@
 vites <- factor(mtcars$am , levels = c(0,1) , labels = c("automatic","manuel")) 
 yakit <- mtcars$mpg
 
-tapply(yakit, vites, mean) # otomatik ve manuel viteslerin örneklem ortalamaları
+tapply(yakit, vites, mean)
 
-tapply(yakit, vites, var) # otomatik ve manuel vitesleri örneklem varyansları
+tapply(yakit, vites, var)
 
-tapply(yakit, vites, length) # otomatik ve manuel viteslere göre örneklem miktarı/n değerleri
+tapply(yakit, vites, length)
 
 #Basit istatistikleri elde ettik şimdi hipotez testine geçebiliriz. iki yanlı hipotez testi incelenecektir
 # Ho : mu1 - mu2 = 0
@@ -20,6 +20,16 @@ tapply(yakit, vites, length) # otomatik ve manuel viteslere göre örneklem mikt
 #n1'de n2'de 30 dan küçükler bu yüzden MLT'de yapamıyoruz t-testi yapmalıyız homojenliğe göre hangi t-testi olduğuna bakacağız
 #iki örneklem varyans testi yapacağız şimdi (sigma_1 / sigma_2)
 
-# Varyansların Homojenliği Testi (F-Test)
+# 1.2.Varyansların Homojenliği Testi (F-Test)
 var.test(yakit ~ vites, data = mtcars)
 
+# Sp^2 li t-testi kullanacağız (varyanslar homojenmiş)
+t.test(mpg ~ am, data = mtcars, var.equal = TRUE, conf.level = 0.95)
+
+# 1.3. İki kitle oranı analiiz
+# Sadece Yetişkinlerin hayatta kalma tablosunu getirir
+Titanic[, , "Adult", ]
+
+prop.test(x = c(316,338), n = c(425,1667))
+
+# 1.4 Bağımlı örneklem analizi
