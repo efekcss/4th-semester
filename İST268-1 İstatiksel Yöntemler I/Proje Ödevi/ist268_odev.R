@@ -33,3 +33,14 @@ Titanic[, , "Adult", ]
 prop.test(x = c(316,338), n = c(425,1667))
 
 # 1.4 Bağımlı örneklem analizi
+
+tapply(sleep$extra, sleep$group, mean)
+tapply(sleep$extra, sleep$group, var)
+tapply(sleep$extra, sleep$group, length)
+
+# 1. ve 2. ilacı alanların verilerini (ilk 10 ve son 10 satırı) ayırıyoruz
+ilac1 <- sleep$extra[sleep$group == 1]
+ilac2 <- sleep$extra[sleep$group == 2]
+
+
+t.test(ilac1, ilac2, paired = TRUE)
