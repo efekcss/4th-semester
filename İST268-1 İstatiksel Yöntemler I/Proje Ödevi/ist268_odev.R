@@ -44,3 +44,20 @@ ilac2 <- sleep$extra[sleep$group == 2]
 
 
 t.test(ilac1, ilac2, paired = TRUE)
+
+### 2. Kİ-KARE ÇÖZÜMLEMESİ 
+
+## 2.1 Uyum iyiliği testi
+
+# Ortalama ve Standart Sapmanın Hesaplanması
+ort_mpg <- mean(mtcars$mpg)
+ss_mpg <- sd(mtcars$mpg)
+
+# Veriyi Sınıflara Ayırma (Gözlenen Frekanslar)
+frekans_tablosu <- hist(mtcars$mpg, plot = TRUE)
+
+# Değerleri Konsola Yazdırma
+ort_mpg
+ss_mpg
+frekans_tablosu$breaks  # Sınıfların başlangıç ve bitiş sınırları
+frekans_tablosu$counts  # Her sınıfa düşen araç sayısı (Gözlenen Frekanslar, f_i)
