@@ -49,15 +49,81 @@ t.test(ilac1, ilac2, paired = TRUE)
 
 ## 2.1 Uyum iyiliği testi
 
-# Ortalama ve Standart Sapmanın Hesaplanması
+# ortalma ve standart sapma hesaplanması
 ort_mpg <- mean(mtcars$mpg)
 ss_mpg <- sd(mtcars$mpg)
 
-# Veriyi Sınıflara Ayırma (Gözlenen Frekanslar)
+# veriyi sınıflra ayırma/Gözlenen Frekanslar
 frekans_tablosu <- hist(mtcars$mpg, plot = TRUE)
 
-# Değerleri Konsola Yazdırma
+# sonuçlar
 ort_mpg
 ss_mpg
 frekans_tablosu$breaks  # Sınıfların başlangıç ve bitiş sınırları
-frekans_tablosu$counts  # Her sınıfa düşen araç sayısı (Gözlenen Frekanslar, f_i)
+frekans_tablosu$counts  # Her sınıfa düşen araç sayısı (Gözlenen Frekanslar= f_i)
+
+# Her sınıfın teorik normal dağılım olasılığını (P_i) hesaplama
+# (Üst sınır olasılığı - Alt sınır olasılığı)
+p_i <- pnorm(frekans_tablosu$breaks[-1], mean = ort_mpg, sd = ss_mpg) - pnorm(frekans_tablosu$breaks[-length(frekans_tablosu$breaks)], mean = ort_mpg, sd = ss_mpg)
+
+# Beklenen Frekansları (e_i = N * P_i) hesaplama
+e_i <- 32 * p_i
+e_i
+
+f_i_yeni <- c(6, 12, 8, 6)
+# 1.sınıfı, 2. sınıfı, 3'ü aynen al, 4. ve 5. sınıfı topla
+e_i_yeni <- c(4.87,9.44,9.55,6.43)
+round(e_i_yeni,2)
+
+# Formül: Toplam( (f_i - e_i)^2 / e_i )
+ki_kare_hesap <- sum((f_i_yeni - e_i_yeni)^2 / e_i_yeni)
+ki_kare_hesap
+
+tablo_degeri <- qchisq(0.95, df = 1)
+tablo_degeri
+
+
+# 2.2 Gruplar Arası Fark 
+# 1. Çapraz Tablonun Oluşturulması (Satır: Gruplar, Sütun: Cevap Değişkeni)
+tablo_fark <- table(mtcars$cyl, mtcars$am)
+print("Gözlenen Frekanslar (f_ij):")
+tablo_fark
+
+# 2. Gruplar Arası Fark Kontrolü (Ki-Kare Testi)
+test_sonucu <- chisq.test(tablo_fark)
+test_sonucu
+
+# 3. Beklenen Frekansların Kontrolü (e_ij >= 5 kuralı için)
+print("Beklenen Frekanslar (e_ij):")
+test_sonucu$expected
+
+# satırların birleştirilmesi
+yeni_tablo_fark <- rbind(tablo_fark[1,] + tablo_fark[2,], tablo_fark[3,])
+rownames(yeni_tablo_fark) <- c("4_ve_6_Silindir", "8_Silindir")
+yeni_tablo_fark
+
+# ki-kare testi
+yeni_test <- chisq.test(yeni_tablo_fark)
+yeni_test
+
+#yeni beklenen frekanslar
+print("Yeni Beklenen Frekanslar:")
+yeni_test$expected
+
+
+# 2.3 İlişki/Bağımsızlık Kontrolü
+# Çapraz Tablonun Oluşturulması (Satır: Motor Şekli, Sütun: Vites Türü)
+tablo_iliski <- table(mtcars$vs, mtcars$am)
+print("Gözlenen Frekanslar Tablosu:")
+tablo_iliski
+
+# bağımsızlık Testi Ki-Kare Testi
+test_iliski <- chisq.test(tablo_iliski)
+test_iliski
+
+# Phi Hesaplanması
+# Formül: karekök( Ki-Kare / n )
+ki_kare_degeri <- test_iliski$statistic
+n <- sum(tablo_iliski)
+phi_katsayisi <- sqrt(ki_kare_degeri / n)
+phi_katsayisi
